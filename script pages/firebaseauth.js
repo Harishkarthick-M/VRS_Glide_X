@@ -61,7 +61,11 @@ const firebaseConfig = {
           auth.signInWithPopup(googleProvider)
               .then((result) => {
                   alert('Signed in with Google!');
-                  window.location.href = '../pages/home.html'; // Redirect after Google sign-in
+                  auth.onAuthStateChanged((user) => {
+                      if (user) {
+                          window.location.href = '../pages/home.html'; // Redirect after Google sign-in
+                      }
+                  });
               })
               .catch((error) => {
                   alert(error.message);
